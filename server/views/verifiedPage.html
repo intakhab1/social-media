@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body{
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            align-items:center;
+            background-color:rgba(0,0,0,.2);
+            display:flex;
+            font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+            height:100vh;
+            justify-content:center;
+            margin:0;
+            text-align:center
+        }
+        .card{
+            background-color:#fff;
+            border-radius:10px;
+            box-shadow:0 4px 8px rgba(0,0,0,.2);
+            padding:20px
+        }
+        .icon{
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .success{
+            color: green;
+        }
+        .error{
+            color: red;
+        }
+        .hideBtn{
+            display: none;
+        }
+        .showBtn{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: rgba(1, 116, 210, 0.971);
+            color: white;
+            margin-top: 10px;
+            
+            cursor:pointer;
+            font-size:16px;
+            transition:background-color .3s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="icon">
+            <span id="statusIcon" class=""></span>
+        </div>
+        <div id="statusMessage" class="">
+            <!-- replace localhost with frontend url -->
+            <a href="http://localhost:3000/login" id="btn" class="">Login</a>
+        </div>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get("message");
+            const status = urlParams.get("status")
+
+            const card = document.querySelector(".card")
+            const statusIcon = document.getElementById("statusIcon")
+            const statusMessage = document.getElementById("statusMessage")
+            const btn = document.getElementById("btn")
+
+            if(status === "success"){
+                statusIcon.innerHTML = '✅'
+                statusMessage.textContent = message
+                card.classList.add("success")
+                statusIcon.classList.add("success")
+                statusMessage.classList.add("success")
+                btn.classList.add("showBtn")
+            }
+            else if( status === "error"){
+                statusIcon.innerHTML = "❌"
+                statusMessage.textContent = message
+                card.classList.add("error")
+                statusIcon.classList.add("error")
+                statusMessage.classList.add("error")
+                btn.classList.add("hideBtn")
+            
+            }
+            else{
+                statusIcon.innerHTML = "❓"
+                statusMessage.textContent = message
+                card.classList.add("error")
+                statusIcon.classList.add("error")
+                statusMessage.classList.add("error")
+                btn.classList.add("hideBtn") 
+            }
+        </script>
+    </div>
+    
+</body>
+</html>
